@@ -1,9 +1,6 @@
 package service.repository;
 
 import java.io.*;
-import java.util.ArrayList;
-
-import model.Model;
 
 public abstract class Repository {
 	protected File file;

@@ -1,4 +1,4 @@
-package service.utils;
+package utils;
 
 public class WriteDataBuilder {
 	private String result = "";
@@ -18,6 +18,6 @@ public class WriteDataBuilder {
 	
 	public String getResult() {
 		result += "\n";
-		return this.result;
+		return result;
 	}
 }
