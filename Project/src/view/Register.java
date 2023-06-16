@@ -9,7 +9,7 @@ public class Register {
         System.out.println("Register as");
         Help.border('=', 100);
 
-        Help.list("1. Student", "2. Teacher", "3. Back");
+        Help.list("Student", "Teacher", "Back");
         int choice = Help.prompt("choice >> ", 1, 3);
 
         if (choice == 1) {

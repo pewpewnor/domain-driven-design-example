@@ -1,6 +1,5 @@
 package view;
 
-// import model.*;
 import utils.Help;
 import AccountManagement.repository.StudentRepository;
 
@@ -36,10 +35,8 @@ public class LandingPage {
   public static void addPresetData() {
     StudentRepository.getInstance().deleteAll();
 
-    StudentRepository.getInstance().insert("name", "email", "password");
-    StudentRepository.getInstance().insert("fuck", "email", "password");
-    StudentRepository.getInstance().insert("raul", "email", "password");
-    StudentRepository.getInstance().insert("juan ga", "email@gmail", "12434");
+    StudentRepository.getInstance().insert("raul", "a@b.com", "a1234");
+    StudentRepository.getInstance().insert("juan gauthama", "email@gmail", "12434");
   }
 
   public static void main(String[] args) {

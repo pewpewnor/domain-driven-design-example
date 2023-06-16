@@ -1,8 +1,7 @@
 package AccountManagement.context.ManagingCredential.controller;
 
-import AccountManagement.repository.StudentRepository;
-import AccountManagement.repository.TeacherRepository;
-import utils.Help;
+import AccountManagement.repository.*;
+import utils.*;
 
 public class ValidateRegister {
     private static String name = "";

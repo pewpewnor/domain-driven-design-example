@@ -173,11 +173,22 @@ public class Help {
         return prompt(prompt, min, max);
     }
 
-
     // #################################################################################
 
-    public static boolean isAlphaNumeric(String s) {
-        return s != null && s.matches("^[a-zA-Z0-9]*$");
+    public static boolean isAlphaNumeric(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+
+            if (!Character.isLetterOrDigit(c)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static boolean isNumeric(String s) {

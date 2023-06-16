@@ -3,9 +3,9 @@ package AccountManagement.repository;
 import java.io.*;
 import java.util.*;
 
-import AccountManagement.factory.StudentFactory;
-import AccountManagement.model.Student;
-import base.Repository;
+import AccountManagement.factory.*;
+import AccountManagement.model.*;
+import base.*;
 import utils.*;
 
 public class StudentRepository extends Repository {

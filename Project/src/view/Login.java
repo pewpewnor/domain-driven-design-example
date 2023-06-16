@@ -15,7 +15,6 @@ public class Login {
     Help.list("Student", "Teacher", "Back");
 
     int choice = Help.prompt("choice >> ", 1, 3);
-    Help.cls();
 
     if (choice == 1) {
       Student student = ValidateLogin.getStudent();

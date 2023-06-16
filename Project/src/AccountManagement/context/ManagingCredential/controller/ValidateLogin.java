@@ -1,10 +1,8 @@
 package AccountManagement.context.ManagingCredential.controller;
 
-
-import AccountManagement.model.Student;
-import AccountManagement.model.Teacher;
-import AccountManagement.repository.StudentRepository;
-import utils.Help;
+import AccountManagement.model.*;
+import AccountManagement.repository.*;
+import utils.*;
 
 public class ValidateLogin {
 
@@ -27,6 +25,7 @@ public class ValidateLogin {
       String email = Help.strPrompt("Email: ", 1);
       String password = Help.strPrompt("Password: ", 1);
 
+      teacher = TeacherRepository.getInstance().findByCredential(email, password);
     }
 
     return teacher;

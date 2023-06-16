@@ -16,7 +16,6 @@ public class Home {
     int choice = 0;
 
     while (true) {
-      Help.cls();
       Help.list("Joined Course", "View all Courses", "View all Assignments", "View Scores", "Logout");
       choice = Help.prompt(">> ", 1, 5);
 
@@ -31,6 +30,7 @@ public class Home {
       } else if (choice == 5) {
         break;
       }
+      Help.cls();
     }
     new LandingPage();
   }
@@ -40,7 +40,6 @@ public class Home {
     int choice = 0;
 
     while (true) {
-      Help.cls();
       Help.list("Teached Course", "View all Courses", "Create New Course", "Log out");
       choice = Help.prompt(">> ", 1, 3);
 
@@ -53,6 +52,7 @@ public class Home {
       } else if (choice == 4) {
         break;
       }
+      Help.cls();
     }
     new LandingPage();
   }

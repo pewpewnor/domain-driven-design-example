@@ -2,10 +2,9 @@ package AccountManagement.repository;
 
 import java.io.*;
 import java.util.*;
-
-import AccountManagement.factory.TeacherFactory;
-import AccountManagement.model.Teacher;
-import base.Repository;
+import AccountManagement.factory.*;
+import AccountManagement.model.*;
+import base.*;
 import utils.*;
 
 public class TeacherRepository extends Repository {
