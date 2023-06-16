@@ -2,7 +2,7 @@ package service.repository;
 
 import java.io.*;
 import java.util.*;
-import model.*;
+import model.Teacher;
 import service.factory.TeacherFactory;
 import utils.*;
 
@@ -91,10 +91,10 @@ public class TeacherRepository extends Repository {
 	}
 
 	public void update(int id, String name, String email, String password) {
-		Teacher teacher = delete(id);
+		delete(id);
 		try {
 			FileWriter writer = new FileWriter(file, true);
-			writer.append(new WriteDataBuilder().add(teacher.getId()).add(name).add(email).add(password)
+			writer.append(new WriteDataBuilder().add(id).add(name).add(email).add(password)
 					.getResult());
 			writer.close();
 		} catch (IOException e) {

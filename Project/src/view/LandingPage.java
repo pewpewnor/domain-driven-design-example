@@ -2,68 +2,48 @@ package view;
 
 // import model.*;
 import utils.Help;
+import service.repository.*;
 
 public class LandingPage {
 
-  // Help help = new Help();
-
-  public void showHomePage() {
-    Help.cls();
-    Help.border('=', 100);
-
-    System.out.println("Welcome to the Online Course Application");
-    System.out.println("1. Login");
-    System.out.println("2. Register");
-    System.out.println("3. Exit");
-    Help.border('=', 100);
-
-    int choice = Help.prompt("choice >> ", 1, 3);
-    Help.cls();
-    if (choice == 1) {
-      new Login();
-    } else if (choice == 2) {
-      new Register();
-    } else {
+  public LandingPage() {
+    while (true) {
+      Help.cls();
       Help.border('=', 100);
-      System.out.println("Exits Program.. See you next time!");
+
+      System.out.println("Welcome to the Online Course Application");
+      System.out.println("1. Login");
+      System.out.println("2. Register");
+      System.out.println("3. Exit");
       Help.border('=', 100);
+
+      int choice = Help.prompt("choice >> ", 1, 3);
+      Help.cls();
+      if (choice == 1) {
+        new Login();
+      } else if (choice == 2) {
+        new Register();
+      } else {
+        Help.border('=', 100);
+        System.out.println("Exits Program.. See you next time!");
+        Help.border('=', 100);
+        Help.pause();
+        break;
+      }
     }
   }
 
-  public LandingPage() {
-    // User user =
-    // int flag = 0;
+  public static void addPresetData() {
+    StudentRepository.getInstance().deleteAll();
 
-    // while(!flag){
-    // // system.out
-    // }
-
-    // Help.pause();
-
-    // Help.cls();
-
-    // System.out.println("1. asasas\n2. asdsdf");
-    // int choice = Help.prompt("choice >>", 1, 2);
-
-    // String[] options = {"opsi 1", "opsi2"};
-    // int choice = Help.comboList(options, "choice >> ", 1, 2);
-
-    // String name;
-    // do {
-    // name = Help.strPrompt("Name: ", 1, 20);
-    // } while (Help.hasLowerCase(name));
-
-    // Help.isNumeric("aaa");
-    // Help.isAlphaNumeric("asa");
-
-    // Help.strToInt("123");
-    // Help.intToStr(1233);
-
-    // Help.border('#', 100);
-    showHomePage();
+    StudentRepository.getInstance().insert("name", "email", "password");
+    StudentRepository.getInstance().insert("fuck", "email", "password");
+    StudentRepository.getInstance().insert("raul", "email", "password");
+    StudentRepository.getInstance().insert("juan ga", "email@gmail", "12434");
   }
 
   public static void main(String[] args) {
+    addPresetData();
     new LandingPage();
   }
 }

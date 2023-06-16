@@ -4,13 +4,13 @@ public class Assignment {
     private int id;
     private String name;
     private String description;
-    boolean status;
+    private int courseId;
 
-    public Assignment(int id, String name, String description) {
+    public Assignment(int id, String name, String description, int courseId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.status = false;
+        this.courseId = courseId;
     }
 
     public int getId() {
@@ -37,16 +37,12 @@ public class Assignment {
         this.description = description;
     }
 
-    public boolean isStatus() {
-        return this.status;
+    public int getCourseId() {
+        return this.courseId;
     }
 
-    public boolean getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
 }

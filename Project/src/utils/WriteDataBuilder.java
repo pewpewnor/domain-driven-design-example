@@ -12,6 +12,9 @@ public class WriteDataBuilder {
 	}
 
 	public WriteDataBuilder add(int integer) {
+		if (result != "") {
+			result += "#";
+		}
 		result += integer;
 		return this;
 	}

@@ -2,7 +2,7 @@ package service.repository;
 
 import java.io.*;
 import java.util.*;
-import model.*;
+import model.Student;
 import service.factory.StudentFactory;
 import utils.*;
 
@@ -93,10 +93,10 @@ public class StudentRepository extends Repository {
 	}
 
 	public void update(int id, String name, String email, String password, int courseId) {
-		Student student = delete(id);
+		delete(id);
 		try {
 			FileWriter writer = new FileWriter(file, true);
-			writer.append(new WriteDataBuilder().add(student.getId()).add(name).add(email).add(password).add(courseId)
+			writer.append(new WriteDataBuilder().add(id).add(name).add(email).add(password).add(courseId)
 					.getResult());
 			writer.close();
 		} catch (IOException e) {

@@ -3,7 +3,7 @@ package view;
 import model.*;
 
 public class MyScore {
-    public MyScore(User user) {
+    public MyScore() {
         System.out.println("My Score");
     }
 }

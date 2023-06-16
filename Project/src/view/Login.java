@@ -6,7 +6,7 @@ import utils.Help;
 
 public class Login {
 
-  public static void menu() {
+  Login() {
     Help.border('=', 100);
     System.out.println("Login As");
     Help.border('=', 100);
@@ -14,6 +14,7 @@ public class Login {
     Help.list("Student", "Teacher", "Back");
 
     int choice = Help.prompt("choice >> ", 1, 3);
+    Help.cls();
 
     if (choice == 1) {
       Student student = ValidateLogin.getStudent();
@@ -27,4 +28,5 @@ public class Login {
       new LandingPage();
     }
   }
+
 }

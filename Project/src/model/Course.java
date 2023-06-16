@@ -2,14 +2,12 @@ package model;
 
 public class Course {
     private int id;
-    private int score;
     private String name;
     private String description;
     private int teacherId;
 
-    public Course(int id, int score, String name, String description, int teacherId) {
+    public Course(int id, String name, String description, int teacherId) {
         this.id = id;
-        this.score = score;
         this.name = name;
         this.description = description;
         this.teacherId = teacherId;
@@ -21,14 +19,6 @@ public class Course {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getScore() {
-        return this.score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public String getName() {
