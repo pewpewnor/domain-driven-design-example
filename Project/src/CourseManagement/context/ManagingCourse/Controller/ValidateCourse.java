@@ -13,8 +13,8 @@ public class ValidateCourse {
         String description = "";
         int teacherId = Home.currentTeacher.getId();
 
-        name = Help.strPrompt("Name [1-20 word]: ", 1, 20);
-        description = Help.strPrompt("Description [1-100 word]", 1, 100);
+        name = Help.strPrompt("Name [1-20 char]: ", 1, 20);
+        description = Help.strPrompt("Description [1-100 char]: ", 1, 100);
 
         CourseRepository.getInstance().insert(name, description, teacherId);
     }

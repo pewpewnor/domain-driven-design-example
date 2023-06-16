@@ -1,6 +1,6 @@
 package view;
 
-import CourseManagement.context.ManagingCourse.Controller.SystemCourse;
+import CourseManagement.context.ManagingCourse.Controller.*;
 // import model.*;
 import utils.Help;
 
@@ -10,7 +10,6 @@ public class AllCourse {
         System.out.println("All Course");
         Help.border('=', 100);
 
-        SystemCourse.viewAllCourse();
-
+        ValidateCourse.viewAllCourse();
     }
 }

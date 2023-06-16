@@ -61,20 +61,28 @@ public class Help {
     // #################################################################################
 
     public static int prompt(String prompt, int min, int max) {
-        int input;
+        int input = min - 1;
         do {
             System.out.print(prompt);
-            input = scan.nextInt();
+            try {
+                input = scan.nextInt();
+            } catch (InputMismatchException e) {
+
+            }
             scan.nextLine();
         } while (input < min || input > max);
         return input;
     }
 
     public static int prompt(String prompt, int min) {
-        int input;
+        int input = min - 1;
         do {
             System.out.print(prompt);
-            input = scan.nextInt();
+            try {
+                input = scan.nextInt();
+            } catch (InputMismatchException e) {
+
+            }
             scan.nextLine();
         } while (input < min);
         return input;

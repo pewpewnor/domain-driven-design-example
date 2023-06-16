@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import CourseManagement.model.*;
 import CourseManagement.context.ManagingCourse.Controller.*;
 import CourseManagement.context.ManagingAssignment.Controller.*;
-import CourseManagement.context.ManagingSubmission.Controller.*;
 
 public class JoinedCourse {
     Course selectedCourse = null;
@@ -100,20 +99,53 @@ public class JoinedCourse {
                 }
             }
 
-            Help.list("Add Assignment", "Grade Assignment","View All Assignment", "Back");
+            Help.list("Add Assignment", "Grade Assignment", "Back");
             int input = Help.prompt(">> ", 1, 4);
 
             if (input == 1) {
                 ValidateAssignment.createAssignment();
             } else if (input == 2) {
-                ValidateAssignment.gradeAssignment();
+                GradeAssignmentMenu(assignments);
             } else if (input == 3) {
-                ValidateAssignment.getAllAssignmentsForCourse();
-            } else if (input == 4) {
                 break;
             }
         } while (true);
         return;
+    }
+
+    public void GradeAssignmentMenu(ArrayList<Assignment> assignments) {
+        do {
+            Help.cls();
+            for (Assignment assignment : assignments) {
+                printAssignmentInformation(assignment);
+                System.out.println();
+            }
+
+            int assignmentID = Help.prompt("Select Assigment ID to Grade (-1 to back):  ", 1);
+
+            if (assignmentID == -1) {
+                return;
+            }
+
+            Assignment selectedAssignment = null;
+
+            for (Assignment a : assignments) {
+                if (a.getId() == assignmentID) {
+                    selectedAssignment = a;
+                    break;
+                }
+            }
+
+            if (selectedAssignment == null) {
+                System.out.println("Invalid Assignment ID");
+                Help.prompt("Press enter to continue", 1);
+                continue;
+            } else {
+                new GradeSubmission(selectedAssignment);
+            }
+
+        } while (true);
+
     }
 
     // teacher

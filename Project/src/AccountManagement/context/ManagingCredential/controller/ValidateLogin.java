@@ -15,9 +15,11 @@ public class ValidateLogin {
 
     student = StudentRepository.getInstance().findByCredential(email, password);
 
-    if(student == null){
-      new LandingPage();
+    if (student == null) {
+      System.out.println("Login credential is incorrect!");
+      Help.pause();
     }
+
     return student;
   }
 
@@ -29,9 +31,11 @@ public class ValidateLogin {
 
     teacher = TeacherRepository.getInstance().findByCredential(email, password);
 
-    if(teacher == null){
-      new LandingPage();
+    if (teacher == null) {
+      System.out.println("Login credential is incorrect!");
+      Help.pause();
     }
+
     return teacher;
   }
 }

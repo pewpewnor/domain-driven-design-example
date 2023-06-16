@@ -19,11 +19,8 @@ public class Register {
 
         } else if (choice == 2) {
             ValidateRegister.createTeacherAccount();
-            System.out.println("Register Successfully");
-            new Login();
-            
+
         } else if (choice == 3) {
-            new LandingPage();
         }
     }
 }

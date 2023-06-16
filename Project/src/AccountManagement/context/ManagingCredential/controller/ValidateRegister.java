@@ -17,8 +17,8 @@ public class ValidateRegister {
         } while (!Help.isValidEmail(email));
 
         do {
-            password = Help.strPrompt("Password [must be alphanumeric & lowercase]: ", 1, 20);
-        } while (!Help.isAlphaNumeric(password) && !Help.hasUpperCase(password));
+            password = Help.strPrompt("Password [must be alphanumeric & must have uppercase]: ", 1, 20);
+        } while (!Help.isAlphaNumeric(password) || !Help.hasUpperCase(password));
 
         do {
             confirmPassword = Help.strPrompt("Confirm Password [must be alphanumeric & lowercase & same as password]: ",

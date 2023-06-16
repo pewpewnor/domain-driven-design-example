@@ -28,7 +28,7 @@ public class LandingPage {
         System.out.println("Exits Program.. See you next time!");
         Help.border('=', 100);
         Help.pause();
-        break;
+        System.exit(0);
       }
     }
   }

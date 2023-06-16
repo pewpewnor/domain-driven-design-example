@@ -27,14 +27,35 @@ public class SubmissionRepository extends Repository {
         return SubmissionFactory.createSubmission(assignmentId, studentId, answer, score);
     }
 
-    public Submission findByAssignmentAndStudentId(int assignmentId, int studentId) {
+    // public Submission findByAssignmentAndStudentId(int assignmentId, int
+    // studentId) {
+    // try {
+    // Scanner reader = new Scanner(file);
+    // while (reader.hasNext()) {
+    // Submission submission = parseSubmission(reader.nextLine().split("#"));
+    // if (submission.getStudentId() == studentId && submission.getAssignmentId() ==
+    // assignmentId) {
+    // reader.close();
+    // return submission;
+    // }
+    // }
+    // reader.close();
+    // } catch (FileNotFoundException e) {
+    // e.printStackTrace();
+    // }
+
+    // return null;
+    // }
+
+    public ArrayList<Submission> findAllByAssignmentId(int assignmentId) {
+        ArrayList<Submission> submissions = new ArrayList<>();
+
         try {
             Scanner reader = new Scanner(file);
             while (reader.hasNext()) {
                 Submission submission = parseSubmission(reader.nextLine().split("#"));
-                if (submission.getStudentId() == studentId && submission.getAssignmentId() == assignmentId) {
-                    reader.close();
-                    return submission;
+                if (submission.getAssignmentId() == assignmentId) {
+                    submissions.add(submission);
                 }
             }
             reader.close();
@@ -42,7 +63,26 @@ public class SubmissionRepository extends Repository {
             e.printStackTrace();
         }
 
-        return null;
+        return submissions;
+    }
+
+    public ArrayList<Submission> findAllByStudentId(int studentId) {
+        ArrayList<Submission> submissions = new ArrayList<>();
+
+        try {
+            Scanner reader = new Scanner(file);
+            while (reader.hasNext()) {
+                Submission submission = parseSubmission(reader.nextLine().split("#"));
+                if (submission.getStudentId() == studentId) {
+                    submissions.add(submission);
+                }
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return submissions;
     }
 
     public ArrayList<Submission> getAll() {
@@ -67,7 +107,7 @@ public class SubmissionRepository extends Repository {
             FileWriter writer = new FileWriter(file, true);
             writer.append(new WriteDataBuilder().add(assignmentId).add(studentId)
                     .add(answer)
-                    .add(score)
+                    .add(-1)
                     .getResult());
             writer.close();
         } catch (IOException e) {

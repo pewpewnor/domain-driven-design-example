@@ -16,7 +16,7 @@ public class Home {
     int choice = 0;
 
     while (true) {
-      Help.list("Joined Course", "View all Courses", "View all Assignments", "View Scores", "Logout");
+      Help.list("Joined Course", "View all Courses", "View Scores", "Logout");
       choice = Help.prompt(">> ", 1, 5);
 
       if (choice == 1) {
@@ -24,12 +24,12 @@ public class Home {
       } else if (choice == 2) {
         new AllCourse();
       } else if (choice == 3) {
-        new MyAssignment();
-      } else if (choice == 4) {
         new MyScore();
-      } else if (choice == 5) {
+      } else if (choice == 4) {
         break;
       }
+
+      Help.pause();
       Help.cls();
     }
     new LandingPage();
@@ -42,6 +42,7 @@ public class Home {
     while (true) {
       Help.list("Teached Course", "View all Courses", "Create New Course", "Log out");
       choice = Help.prompt(">> ", 1, 3);
+      Help.cls();
 
       if (choice == 1) {
         new JoinedCourse();
@@ -52,12 +53,15 @@ public class Home {
       } else if (choice == 4) {
         break;
       }
+
+      Help.pause();
       Help.cls();
     }
     new LandingPage();
   }
 
   public Home(User user) {
+    Help.cls();
     Help.border('=', 100);
     System.out.println("Home");
     Help.border('=', 100);
