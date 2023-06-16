@@ -4,11 +4,13 @@ public class Submission {
     private int assignmentId;
     private int studentId;
     private String answer;
+    private int score;
 
-    public Submission(int assignmentId, int studentId, String answer) {
+    public Submission(int assignmentId, int studentId, String answer, int score) {
         this.assignmentId = assignmentId;
         this.studentId = studentId;
         this.answer = answer;
+        this.score = score;
     }
 
     public int getAssignmentId() {
@@ -33,6 +35,14 @@ public class Submission {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
 }

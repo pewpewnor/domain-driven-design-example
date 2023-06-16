@@ -1,7 +1,8 @@
 package view;
 
 import utils.Help;
-import AccountManagement.repository.StudentRepository;
+import AccountManagement.repository.*;
+import CourseManagement.repository.*;
 
 public class LandingPage {
 
@@ -34,9 +35,14 @@ public class LandingPage {
 
   public static void addPresetData() {
     StudentRepository.getInstance().deleteAll();
+    TeacherRepository.getInstance().deleteAll();
+    AssignmentRepository.getInstance().deleteAll();
+    CourseRepository.getInstance().deleteAll();
+    MaterialRepository.getInstance().deleteAll();
+    SubmissionRepository.getInstance().deleteAll();
 
-    StudentRepository.getInstance().insert("raul", "a@b.com", "a1234");
-    StudentRepository.getInstance().insert("juan gauthama", "email@gmail", "12434");
+    StudentRepository.getInstance().insert("Raul", "a@b.com", "a1234");
+    TeacherRepository.getInstance().insert("Juan Gauthama", "a@b.com", "a1234");
   }
 
   public static void main(String[] args) {

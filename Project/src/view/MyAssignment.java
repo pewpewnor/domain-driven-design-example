@@ -7,9 +7,9 @@ import CourseManagement.model.Assignment;
 import utils.Help;
 
 public class MyAssignment {
-    Student student = Home.currentStudent;
+    Student student;
 
-    public void printAssignment(Assignment assignment){
+    public void printAssignment(Assignment assignment) {
         System.out.println("Assignment ID: " + assignment.getId());
         System.out.println("Assignment Name: " + assignment.getName());
         System.out.println("Assignment Description: ");
@@ -17,12 +17,14 @@ public class MyAssignment {
     }
 
     public MyAssignment() {
+        student = Home.currentStudent;
+
         Help.border('=', 100);
         System.out.println("My Assignment");
         Help.border('=', 100);
 
         ArrayList<Assignment> assignments = null;
-        if(assignments == null || assignments.size() == 0) {
+        if (assignments == null || assignments.size() == 0) {
             System.out.println("No Assignment found");
             Help.prompt("Press enter to continue");
             Help.cls();
@@ -30,7 +32,6 @@ public class MyAssignment {
         }
 
         printAssignment(assignments.get(0));
-
 
     }
 }
