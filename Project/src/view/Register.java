@@ -1,7 +1,7 @@
 package view;
 
 import utils.Help;
-import AccountManagement.ManagingCredential.controller.ValidateRegister;
+import AccountManagement.context.ManagingCredential.controller.ValidateRegister;
 
 public class Register {
     public Register() {

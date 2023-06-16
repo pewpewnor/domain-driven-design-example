@@ -2,7 +2,9 @@ package view;
 
 // import model.*;
 import utils.Help;
-import model.*;
+import AccountManagement.model.Student;
+import AccountManagement.model.Teacher;
+import AccountManagement.model.User;
 
 public class Home {
   public static boolean currentUserIsStudent;
@@ -23,7 +25,7 @@ public class Home {
       } else if (choice == 2) {
         new AllCourse();
       } else if (choice == 3) {
-        new MyAssignment(student);
+        new MyAssignment();
       } else if (choice == 4) {
         new MyScore();
       } else if (choice == 5) {

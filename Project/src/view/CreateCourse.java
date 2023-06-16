@@ -1,8 +1,8 @@
 package view;
 
+import CourseManagement.context.ManagingCourse.Controller.ValidateCourse;
 // import model.*;
 import utils.Help;
-import CourseManagement.ManagingCourse.Controller.ValidateCourse;
 
 public class CreateCourse {
     public CreateCourse() {

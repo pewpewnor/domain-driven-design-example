@@ -1,7 +1,8 @@
 package view;
 
-import AccountManagement.ManagingCredential.controller.ValidateLogin;
-import model.*;
+import AccountManagement.context.ManagingCredential.controller.ValidateLogin;
+import AccountManagement.model.Student;
+import AccountManagement.model.Teacher;
 import utils.Help;
 
 public class Login {

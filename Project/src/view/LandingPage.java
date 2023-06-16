@@ -2,7 +2,7 @@ package view;
 
 // import model.*;
 import utils.Help;
-import service.repository.*;
+import AccountManagement.repository.StudentRepository;
 
 public class LandingPage {
 

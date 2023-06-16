@@ -1,9 +1,12 @@
 package view;
 
-import model.*;
-import service.repository.CourseRepository;
 import utils.Help;
 import java.util.ArrayList;
+
+import CourseManagement.context.ManagingSubmission.Controller.Material;
+import CourseManagement.model.Assignment;
+import CourseManagement.model.Course;
+import CourseManagement.repository.CourseRepository;
 
 public class JoinedCourse {
 
