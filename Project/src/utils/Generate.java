@@ -25,4 +25,5 @@ public class Generate {
 
         return highest + 1;
     }
+
 }

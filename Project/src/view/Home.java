@@ -2,71 +2,57 @@ package view;
 
 // import model.*;
 import utils.Help;
+import model.*;
 
-public class Home{
-    // Help help = new Help();
+public class Home {
 
-    public void showHomePage(){
-        Help.cls();
-        Help.border('=', 100);
-        
-        System.out.println("Welcome to the Online Course Application");
-        System.out.println("1. Login");
-        System.out.println("2. Register");
-        System.out.println("3. Exit");
-        Help.border('=', 100);
+  public void showStudentPage(Student user) {
+    Help.list("Joined Course", "View all Courses", "View all Assignments", "View Scores", "Logout");
+    int choice = Help.prompt(">> ", 1, 5);
+    Help.cls();
 
-        int choice = Help.prompt("choice >> ", 1, 3);
-        Help.cls();
-        if(choice == 1){   
-            new Login();
-        }
-        else if(choice == 2){
-            new Register();
-        }
-        else{
-            Help.border('=', 100);
-            System.out.println("Exits Program.. See you next time!");
-            Help.border('=', 100);
-        }
-        
+    if (choice == 1) {
+      new JoinedCourse(user);
+    } else if (choice == 2) {
+      new AllCourse(user);
+    } else if (choice == 3) {
+      new MyAssignment(user);
+    } else if (choice == 4) {
+      new MyScore(user);
+    } else {
+      new LandingPage();
+    }
+  }
+
+  public void showTeacherPage(Teacher user) {
+    Help.list("Teached Course", "View all Courses", "Create New Course", "Log out");
+    int choice = Help.prompt(">> ", 1, 3);
+    Help.cls();
+
+    if (choice == 1) {
+      new JoinedCourse(user);
+    } else if (choice == 2) {
+      new AllCourse(user);
+    } else if (choice == 3) {
+      new CreateCourse(user);
+    } else {
+      new LandingPage();
     }
 
-    public Home(){
-        // User user = 
-        // int flag = 0;
+  }
 
-        // while(!flag){
-        //     // system.out
-        // }
-        
-        // Help.pause();
+  public Home(User user) {
+    Help.cls();
+    Help.border('=', 100);
+    System.out.println("Home");
+    Help.border('=', 100);
 
-        // Help.cls();
-
-        // System.out.println("1. asasas\n2. asdsdf");
-        // int choice = Help.prompt("choice >>", 1, 2);
-
-        // String[] options = {"opsi 1", "opsi2"};
-        // int choice = Help.comboList(options, "choice >> ", 1, 2);
-
-        // String name;
-        // do {
-        //     name = Help.strPrompt("Name: ", 1, 20);
-        // } while (Help.hasLowerCase(name));
-
-        // Help.isNumeric("aaa");
-        // Help.isAlphaNumeric("asa");
-        
-        // Help.strToInt("123");
-        // Help.intToStr(1233);
-
-        // Help.border('#', 100);
-        showHomePage();
-
+    if (user instanceof Teacher) {
+      showTeacherPage((Teacher) user);
+    } else if (user instanceof Student) {
+      showStudentPage((Student) user);
     }
 
-    public static void main(String[] args) {
-		new Home();
-	}
+  }
+
 }

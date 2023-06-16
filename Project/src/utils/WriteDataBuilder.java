@@ -2,7 +2,7 @@ package utils;
 
 public class WriteDataBuilder {
 	private String result = "";
-	
+
 	public WriteDataBuilder add(String string) {
 		if (result != "") {
 			result += "#";
@@ -10,14 +10,15 @@ public class WriteDataBuilder {
 		result += string;
 		return this;
 	}
-	
+
 	public WriteDataBuilder add(int integer) {
 		result += integer;
 		return this;
 	}
-	
+
 	public String getResult() {
 		result += "\n";
 		return result;
 	}
+
 }

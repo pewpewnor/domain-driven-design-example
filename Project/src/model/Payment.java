@@ -1,14 +1,14 @@
 package model;
 
-public class Payment{
+public class Payment {
     private String currency;
     private Double balance;
 
-    public Payment(String currency, Double balance){
+    public Payment(String currency, Double balance) {
         this.balance = balance;
         this.currency = currency;
     }
-    
+
     public String getCurrency() {
         return this.currency;
     }
@@ -24,7 +24,5 @@ public class Payment{
     public void setBalance(Double balance) {
         this.balance = balance;
     }
-
-
 
 }

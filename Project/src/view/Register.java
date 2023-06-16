@@ -1,16 +1,29 @@
 package view;
 
 import utils.Help;
+import AccountManagement.ManagingCredential.controller.ValidateRegister;
 
 public class Register {
-    public Register(){
+    public Register() {
         Help.border('=', 100);
-        System.out.println("Register");
+        System.out.println("Register as");
         Help.border('=', 100);
 
-        String name = Help.strPrompt("Name: ", 1);
-        String email = Help.strPrompt("Email: ", 1);
-        String password = Help.strPrompt("Password: ", 1);
-        String confirmPassword = Help.strPrompt("Confirm Password: ", 1);
+        Help.list("1. Student", "2. Teacher", "3. Back");
+        int choice = Help.prompt("choice >> ", 1, 3);
+
+        if (choice == 1) {
+            ValidateRegister.createStudentAccount();
+            System.out.println("Register Successfully");
+            new Login();
+
+        } else if (choice == 2) {
+            ValidateRegister.createTeacherAccount();
+            System.out.println("Register Successfully");
+            new Login();
+            
+        } else if (choice == 3) {
+            new LandingPage();
+        }
     }
 }

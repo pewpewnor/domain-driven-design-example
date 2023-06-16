@@ -1,20 +1,18 @@
 package model;
 
-import java.util.*;
-
 public class Course {
     private int id;
     private int score;
     private String name;
     private String description;
-    private ArrayList<Student> students;
-    private ArrayList<Teacher> teachers;
-    private ArrayList<Assignment> assignments;
+    private int teacherId;
 
-    public Course(int id, String name, String description){
+    public Course(int id, int score, String name, String description, int teacherId) {
         this.id = id;
+        this.score = score;
         this.name = name;
         this.description = description;
+        this.teacherId = teacherId;
     }
 
     public int getId() {
@@ -23,6 +21,14 @@ public class Course {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getName() {
@@ -41,19 +47,12 @@ public class Course {
         this.description = description;
     }
 
-    public ArrayList<Student> getStudents() {
-        return this.students;
+    public int getTeacherId() {
+        return this.teacherId;
     }
 
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public ArrayList<Teacher> getTeachers() {
-        return this.teachers;
-    }
-
-    public void setTeachers(ArrayList<Teacher> teachers) {
-        this.teachers = teachers;
-    }
 }

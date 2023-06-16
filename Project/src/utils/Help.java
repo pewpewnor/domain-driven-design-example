@@ -30,7 +30,7 @@ public class Help {
     }
 
     public static void cls() {
-    	System.out.println(new String(new char[30]).replace("\0", "\r\n"));
+        System.out.println(new String(new char[30]).replace("\0", "\r\n"));
     }
 
     public static void sleep(int milisecond) {
@@ -44,7 +44,7 @@ public class Help {
     // #################################################################################
 
     public static void border(char c, int n) {
-        for (int i=0; i < n; ++i) {
+        for (int i = 0; i < n; ++i) {
             System.out.print(c);
         }
         System.out.println();
@@ -52,7 +52,7 @@ public class Help {
 
     public static void border(char alphaomega, char c, int n) {
         System.out.print(alphaomega);
-        for (int i=1; i < n; ++i) {
+        for (int i = 1; i < n; ++i) {
             System.out.print(c);
         }
         System.out.println(alphaomega);
@@ -64,7 +64,8 @@ public class Help {
         int input;
         do {
             System.out.print(prompt);
-            input = scan.nextInt(); scan.nextLine();
+            input = scan.nextInt();
+            scan.nextLine();
         } while (input < min || input > max);
         return input;
     }
@@ -73,7 +74,8 @@ public class Help {
         int input;
         do {
             System.out.print(prompt);
-            input = scan.nextInt(); scan.nextLine();
+            input = scan.nextInt();
+            scan.nextLine();
         } while (input < min);
         return input;
     }
@@ -81,7 +83,8 @@ public class Help {
     public static int prompt(String prompt) {
         int input;
         System.out.print(prompt);
-        input = scan.nextInt(); scan.nextLine();
+        input = scan.nextInt();
+        scan.nextLine();
         return input;
     }
 
@@ -105,7 +108,7 @@ public class Help {
             System.out.print(beginning);
             input = scan.nextLine();
             len = input.length();
-        } while  (len < min_char);
+        } while (len < min_char);
         return input;
     }
 
@@ -116,7 +119,7 @@ public class Help {
             System.out.print(beginning);
             input = scan.nextLine();
             len = input.length();
-        } while  (len < min_char || len > max_char);
+        } while (len < min_char || len > max_char);
         return input;
     }
 
@@ -160,8 +163,8 @@ public class Help {
     // #################################################################################
 
     public static void list(String... tolist) {
-        for (int i=0; i < tolist.length; ++i) {
-            System.out.println(i+1 + ". " + tolist[i]);
+        for (int i = 0; i < tolist.length; ++i) {
+            System.out.println(i + 1 + ". " + tolist[i]);
         }
     }
 
@@ -177,29 +180,30 @@ public class Help {
     }
 
     public static boolean isNumeric(String s) {
-        return s!= null && s.matches(".*\\d.*");
+        return s != null && s.matches(".*\\d.*");
     }
 
     public static boolean isValidEmail(String email) {
-    	if (email == null || email.isEmpty()) {
-    	    return false;
-	    }
-	
-	    int atIndex = email.indexOf('@');
-	    int dotIndex = email.lastIndexOf('.');
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
 
-	    if (atIndex <= 0 || dotIndex < atIndex || email.startsWith(".") || email.endsWith(".") || email.contains(".@") || email.contains("@.")) {
-	        return false;
-	    }
+        int atIndex = email.indexOf('@');
+        int dotIndex = email.lastIndexOf('.');
 
-	    return true;
-	}
+        if (atIndex <= 0 || dotIndex < atIndex || email.startsWith(".") || email.endsWith(".") || email.contains(".@")
+                || email.contains("@.")) {
+            return false;
+        }
+
+        return true;
+    }
 
     public static boolean hasUpperCase(String s) {
         int len = s.length();
-        for (int i=0; i < len; ++i) {
+        for (int i = 0; i < len; ++i) {
             char c = s.charAt(i);
-            if (c >= 'A' && c <= 'Z'){
+            if (c >= 'A' && c <= 'Z') {
                 return true;
             }
         }
@@ -208,9 +212,9 @@ public class Help {
 
     public static boolean hasLowerCase(String s) {
         int len = s.length();
-        for (int i=0; i < len; ++i) {
+        for (int i = 0; i < len; ++i) {
             char c = s.charAt(i);
-            if (c >= 'a' && c <= 'z'){
+            if (c >= 'a' && c <= 'z') {
                 return true;
             }
         }
@@ -222,8 +226,7 @@ public class Help {
     public static Integer strToInt(String s) {
         try {
             return Integer.parseInt(s);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -231,9 +234,9 @@ public class Help {
     public static String intToStr(int n) {
         try {
             return Integer.toString(n);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }
+
 }

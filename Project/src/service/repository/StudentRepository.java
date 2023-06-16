@@ -12,20 +12,21 @@ public class StudentRepository extends Repository {
 	private StudentRepository() {
 		super("student");
 	}
-	
+
 	public static StudentRepository getInstance() {
 		return instance == null ? new StudentRepository() : instance;
 	}
 
-	public Student parseStudent(String[] items) {
+	private Student parseStudent(String[] items) {
 		int id = Integer.parseInt(items[0]);
 		String name = items[1];
 		String email = items[2];
 		String password = items[3];
+		int courseId = Integer.parseInt(items[4]);
 
-		return StudentFactory.createStudent(id, name, email, password);
+		return StudentFactory.createStudent(id, name, email, password, courseId);
 	}
-	
+
 	public Student findById(int id) {
 		try {
 			Scanner reader = new Scanner(file);
@@ -64,7 +65,7 @@ public class StudentRepository extends Repository {
 
 	public ArrayList<Student> getAll() {
 		ArrayList<Student> students = new ArrayList<>();
-		
+
 		try {
 			Scanner reader = new Scanner(file);
 			while (reader.hasNext()) {
@@ -75,32 +76,35 @@ public class StudentRepository extends Repository {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		return students;
 	}
 
 	public void insert(String name, String email, String password) {
 		try {
 			FileWriter writer = new FileWriter(file, true);
-			writer.append(new WriteDataBuilder().add(Generate.generateLatestId(file)).add(name).add(email).add(password).getResult());
+			writer.append(new WriteDataBuilder().add(Generate.generateLatestId(file)).add(name).add(email).add(password)
+					.add(0)
+					.getResult());
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void update(int id, String name, String email, String password) {
+	public void update(int id, String name, String email, String password, int courseId) {
 		Student student = delete(id);
 		try {
 			FileWriter writer = new FileWriter(file, true);
-			writer.append(new WriteDataBuilder().add(student.getId()).add(name).add(email).add(password).getResult());
+			writer.append(new WriteDataBuilder().add(student.getId()).add(name).add(email).add(password).add(courseId)
+					.getResult());
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public Student delete(int id) {
+	private Student delete(int id) {
 		Student deleted = null;
 		String tempContent = "";
 
@@ -113,8 +117,7 @@ public class StudentRepository extends Repository {
 
 				if (student.getId() == id) {
 					deleted = student;
-				}
-				else {
+				} else {
 					tempContent += line + "\n";
 				}
 			}
@@ -133,7 +136,7 @@ public class StudentRepository extends Repository {
 
 		return deleted;
 	}
-	
+
 	public void deleteAll() {
 		try {
 			FileWriter writer = new FileWriter(file, false);
