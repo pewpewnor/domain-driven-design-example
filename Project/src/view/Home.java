@@ -43,7 +43,7 @@ public class Home {
 
     while (true) {
       printBanner();
-      Help.list("Teached Course", "View all Courses", "Create New Course", "Log out");
+      Help.list("Teached Course", "View all Courses", "Create New Course", "My Salary", "Log out");
       choice = Help.prompt(">> ", 1, 3);
       Help.cls();
 
@@ -54,6 +54,9 @@ public class Home {
       } else if (choice == 3) {
         new CreateCourse();
       } else if (choice == 4) {
+        new SalaryPage();
+      }
+      else if (choice == 4) {
         break;
       }
 
