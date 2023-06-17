@@ -18,7 +18,7 @@ public class MyScore {
     }
 
     public MyScore() {
-        student = Home.currentStudent;
+        student = Home.getCurrentStudent();
 
         Help.border('=', 100);
         System.out.println("My Score");

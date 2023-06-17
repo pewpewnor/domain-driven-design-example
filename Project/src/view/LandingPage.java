@@ -48,7 +48,7 @@ public class LandingPage {
   }
 
   public static void main(String[] args) {
-    addPresetData();
+    // addPresetData();
     new LandingPage();
   }
 }

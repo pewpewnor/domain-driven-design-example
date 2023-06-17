@@ -7,6 +7,7 @@ import AccountManagement.repository.StudentRepository;
 import CourseManagement.model.Submission;
 import CourseManagement.repository.SubmissionRepository;
 import utils.Help;
+import view.Home;
 
 public class ValidateSubmission {
     public static void gradeSubmissionScore(Submission submission) {
@@ -26,6 +27,17 @@ public class ValidateSubmission {
     // SubmissionRepository.getInstance().findByAssignmentAndStudentId(assignmentId,
     // studentId);
     // }
+
+    public static void submitSubmission(int assignmentId) {
+        String answer = Help.strPrompt("Enter your answer: ", 1);
+
+        if (SubmissionRepository.getInstance().findByAssignmentAndStudentId(assignmentId,
+                Home.getCurrentStudent().getId()) != null) {
+            SubmissionRepository.getInstance().update(assignmentId, Home.getCurrentStudent().getId(), answer, -1);
+        } else {
+            SubmissionRepository.getInstance().insert(assignmentId, Home.getCurrentStudent().getId(), answer);
+        }
+    }
 
     public static ArrayList<Submission> getAllSubmissionByStudent(int studentId) {
         return SubmissionRepository.getInstance().findAllByStudentId(studentId);

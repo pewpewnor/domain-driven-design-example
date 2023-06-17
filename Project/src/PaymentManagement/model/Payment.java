@@ -1,4 +1,4 @@
-package PaymentManagement.context.ManagingPayment.model;
+package PaymentManagement.model;
 
 public class Payment {
     private String currency;

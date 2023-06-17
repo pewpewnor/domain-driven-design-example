@@ -19,6 +19,14 @@ public class WriteDataBuilder {
 		return this;
 	}
 
+	public WriteDataBuilder add(double decimal) {
+		if (result != "") {
+			result += "#";
+		}
+		result += decimal;
+		return this;
+	}
+
 	public String getResult() {
 		result += "\n";
 		return result;

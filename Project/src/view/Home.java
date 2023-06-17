@@ -1,15 +1,24 @@
 package view;
 
-// import model.*;
 import utils.Help;
 import AccountManagement.model.Student;
 import AccountManagement.model.Teacher;
 import AccountManagement.model.User;
+import AccountManagement.repository.StudentRepository;
+import AccountManagement.repository.TeacherRepository;
 
 public class Home {
   public static boolean currentUserIsStudent;
-  public static Teacher currentTeacher = null;
-  public static Student currentStudent = null;
+  public static int currentTeacherId = 0;
+  public static int currentStudentId = 0;
+
+  public static Teacher getCurrentTeacher() {
+    return TeacherRepository.getInstance().findById(currentTeacherId);
+  }
+
+  public static Student getCurrentStudent() {
+    return StudentRepository.getInstance().findById(currentStudentId);
+  }
 
   // student
   public void showStudentPage(Student student) {
@@ -18,7 +27,7 @@ public class Home {
     while (true) {
       printBanner();
       Help.list("Joined Course", "View all Courses", "View Scores", "Logout");
-      choice = Help.prompt(">> ", 1, 5);
+      choice = Help.prompt(">> ", 1, 4);
       Help.cls();
 
       if (choice == 1) {
@@ -44,7 +53,7 @@ public class Home {
     while (true) {
       printBanner();
       Help.list("Teached Course", "View all Courses", "Create New Course", "My Salary", "Log out");
-      choice = Help.prompt(">> ", 1, 3);
+      choice = Help.prompt(">> ", 1, 5);
       Help.cls();
 
       if (choice == 1) {
@@ -55,8 +64,7 @@ public class Home {
         new CreateCourse();
       } else if (choice == 4) {
         new SalaryPage();
-      }
-      else if (choice == 4) {
+      } else if (choice == 5) {
         break;
       }
 
@@ -68,8 +76,8 @@ public class Home {
 
   public void printBanner() {
     Help.border('=', 100);
-    System.out.println(currentUserIsStudent ? "Student Home Page, welcome " + currentStudent.getName() + "!"
-        : "Teacher Home Page, welcome " + currentTeacher.getName() + "!");
+    System.out.println(currentUserIsStudent ? "Student Home Page, welcome " + getCurrentStudent().getName() + "!"
+        : "Teacher Home Page, welcome " + getCurrentTeacher().getName() + "!");
     Help.border('=', 100);
   }
 
@@ -78,11 +86,11 @@ public class Home {
     Help.cls();
 
     if (user instanceof Teacher) {
-      currentTeacher = ((Teacher) user);
+      currentTeacherId = ((Teacher) user).getId();
       currentUserIsStudent = false;
       showTeacherPage((Teacher) user);
     } else if (user instanceof Student) {
-      currentStudent = ((Student) user);
+      currentStudentId = ((Student) user).getId();
       currentUserIsStudent = true;
       showStudentPage((Student) user);
     }

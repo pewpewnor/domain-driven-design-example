@@ -24,6 +24,11 @@ public class GradeSubmission {
 
         ArrayList<Submission> submissions = ValidateSubmission.getAllSubmissionForAssignment(assignment.getId());
 
+        if (submissions.size() == 0) {
+            System.out.println("No submissions by students yet!");
+            return;
+        }
+
         int i = 1;
         for (Submission submission : submissions) {
             printSubmission(i, submission);

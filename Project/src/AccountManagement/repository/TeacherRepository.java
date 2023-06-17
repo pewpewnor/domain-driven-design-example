@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import AccountManagement.factory.*;
 import AccountManagement.model.*;
+import PaymentManagement.model.Payment;
 import base.*;
 import utils.*;
 
@@ -23,8 +24,10 @@ public class TeacherRepository extends Repository {
 		String name = items[1];
 		String email = items[2];
 		String password = items[3];
+		String currency = items[4];
+		double balance = Double.parseDouble(items[5]);
 
-		return TeacherFactory.createTeacher(id, name, email, password);
+		return TeacherFactory.createTeacher(id, name, email, password, currency, balance);
 	}
 
 	public Teacher findById(int id) {
@@ -84,6 +87,7 @@ public class TeacherRepository extends Repository {
 		try {
 			FileWriter writer = new FileWriter(file, true);
 			writer.append(new WriteDataBuilder().add(Generate.generateLatestId(file)).add(name).add(email).add(password)
+					.add("IDR").add(0.0)
 					.getResult());
 			writer.close();
 		} catch (IOException e) {
@@ -91,11 +95,12 @@ public class TeacherRepository extends Repository {
 		}
 	}
 
-	public void update(int id, String name, String email, String password) {
+	public void update(int id, String name, String email, String password, Payment payment) {
 		delete(id);
 		try {
 			FileWriter writer = new FileWriter(file, true);
 			writer.append(new WriteDataBuilder().add(id).add(name).add(email).add(password)
+					.add(payment.getCurrency()).add(payment.getBalance())
 					.getResult());
 			writer.close();
 		} catch (IOException e) {

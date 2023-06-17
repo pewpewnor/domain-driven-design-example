@@ -34,5 +34,6 @@ public class ValidateRegister {
     public static void createTeacherAccount() {
         getData();
         TeacherRepository.getInstance().insert(name, email, password);
+        ;
     }
 }

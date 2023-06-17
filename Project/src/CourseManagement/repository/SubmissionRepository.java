@@ -21,31 +21,29 @@ public class SubmissionRepository extends Repository {
     private Submission parseSubmission(String[] items) {
         int assignmentId = Integer.parseInt(items[0]);
         int studentId = Integer.parseInt(items[1]);
-        String answer = items[3];
-        int score = Integer.parseInt(items[4]);
+        String answer = items[2];
+        int score = Integer.parseInt(items[3]);
 
         return SubmissionFactory.createSubmission(assignmentId, studentId, answer, score);
     }
 
-    // public Submission findByAssignmentAndStudentId(int assignmentId, int
-    // studentId) {
-    // try {
-    // Scanner reader = new Scanner(file);
-    // while (reader.hasNext()) {
-    // Submission submission = parseSubmission(reader.nextLine().split("#"));
-    // if (submission.getStudentId() == studentId && submission.getAssignmentId() ==
-    // assignmentId) {
-    // reader.close();
-    // return submission;
-    // }
-    // }
-    // reader.close();
-    // } catch (FileNotFoundException e) {
-    // e.printStackTrace();
-    // }
+    public Submission findByAssignmentAndStudentId(int assignmentId, int studentId) {
+        try {
+            Scanner reader = new Scanner(file);
+            while (reader.hasNext()) {
+                Submission submission = parseSubmission(reader.nextLine().split("#"));
+                if (submission.getStudentId() == studentId && submission.getAssignmentId() == assignmentId) {
+                    reader.close();
+                    return submission;
+                }
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-    // return null;
-    // }
+        return null;
+    }
 
     public ArrayList<Submission> findAllByAssignmentId(int assignmentId) {
         ArrayList<Submission> submissions = new ArrayList<>();
@@ -102,7 +100,7 @@ public class SubmissionRepository extends Repository {
         return submissions;
     }
 
-    public void insert(int assignmentId, int studentId, String answer, int score) {
+    public void insert(int assignmentId, int studentId, String answer) {
         try {
             FileWriter writer = new FileWriter(file, true);
             writer.append(new WriteDataBuilder().add(assignmentId).add(studentId)

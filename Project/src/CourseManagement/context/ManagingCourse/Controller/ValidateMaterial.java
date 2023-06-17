@@ -16,7 +16,6 @@ public class ValidateMaterial {
         System.out.println("> Material Name: " + material.getName());
         System.out.println("> Material Content: ");
         System.out.println(material.getContent());
-        System.out.println("> Material Course ID: " + material.getCourseId());
     }
 
     public static void printAllMaterial(ArrayList<Material> materials) {

@@ -27,7 +27,9 @@ public class AllCourse {
 
         while (true) {
             int courseId = Help.prompt("Enter courseId to Join: ", 1);
-            if (ValidateCourse.courseNotNull(courseId)) {
+            Course selectourse = ValidateCourse.courseNotNull(courseId);
+            if (selectourse != null) {
+                System.out.println("Congrats! You have just joined a new course!");
                 ValidateCourse.addStudentToCourse(courseId);
                 break;
             } else {
@@ -38,7 +40,6 @@ public class AllCourse {
     }
 
     public AllCourse() {
-
         Help.border('=', 100);
         System.out.println("All Course");
         Help.border('=', 100);
