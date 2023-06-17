@@ -15,12 +15,14 @@ public class Register {
         if (choice == 1) {
             ValidateRegister.createStudentAccount();
             System.out.println("Register Successfully");
+            Help.pause();
             new Login();
 
         } else if (choice == 2) {
             ValidateRegister.createTeacherAccount();
-
-        } else if (choice == 3) {
+            System.out.println("Register Successfully");
+            Help.pause();
+            new Login();
         }
     }
 }

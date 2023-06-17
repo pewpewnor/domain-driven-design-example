@@ -27,8 +27,6 @@ public class MyScore {
         ArrayList<Submission> submissions = ValidateSubmission.getAllSubmissionByStudent(student.getId());
         if (submissions == null || submissions.size() == 0) {
             System.out.println("No Submission found");
-            Help.prompt("Press enter to continue");
-            Help.cls();
             return;
         }
 
@@ -37,9 +35,6 @@ public class MyScore {
             printSubmission(i, submission);
             i++;
         }
-
-        Help.prompt("Press enter to continue", 1);
-        Help.cls();
 
     }
 }

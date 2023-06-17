@@ -25,4 +25,11 @@ public abstract class ValidateAssignment {
         return AssignmentRepository.getInstance().findAllByCourseId(courseId);
     }
 
+    public static Assignment assignmentNotNull(int assignmentID) {
+        if(AssignmentRepository.getInstance().findById(assignmentID) != null) {
+            return AssignmentRepository.getInstance().findById(assignmentID);
+        }
+        return null;
+    }
+
 }

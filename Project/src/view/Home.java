@@ -16,8 +16,10 @@ public class Home {
     int choice = 0;
 
     while (true) {
+      printBanner();
       Help.list("Joined Course", "View all Courses", "View Scores", "Logout");
       choice = Help.prompt(">> ", 1, 5);
+      Help.cls();
 
       if (choice == 1) {
         new JoinedCourse();
@@ -40,6 +42,7 @@ public class Home {
     int choice = 0;
 
     while (true) {
+      printBanner();
       Help.list("Teached Course", "View all Courses", "Create New Course", "Log out");
       choice = Help.prompt(">> ", 1, 3);
       Help.cls();
@@ -60,11 +63,16 @@ public class Home {
     new LandingPage();
   }
 
+  public void printBanner() {
+    Help.border('=', 100);
+    System.out.println(currentUserIsStudent ? "Student Home Page, welcome " + currentStudent.getName() + "!"
+        : "Teacher Home Page, welcome " + currentTeacher.getName() + "!");
+    Help.border('=', 100);
+  }
+
   public Home(User user) {
+
     Help.cls();
-    Help.border('=', 100);
-    System.out.println("Home");
-    Help.border('=', 100);
 
     if (user instanceof Teacher) {
       currentTeacher = ((Teacher) user);

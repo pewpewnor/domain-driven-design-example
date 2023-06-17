@@ -12,9 +12,10 @@ public class LandingPage {
       Help.border('=', 100);
 
       System.out.println("Welcome to the Online Course Application");
-      System.out.println("1. Login");
-      System.out.println("2. Register");
-      System.out.println("3. Exit");
+      Help.list("Login", "Register", "Exit");
+      // System.out.println("1. Login");
+      // System.out.println("2. Register");
+      // System.out.println("3. Exit");
       Help.border('=', 100);
 
       int choice = Help.prompt("choice >> ", 1, 3);
@@ -41,8 +42,9 @@ public class LandingPage {
     MaterialRepository.getInstance().deleteAll();
     SubmissionRepository.getInstance().deleteAll();
 
-    StudentRepository.getInstance().insert("Raul", "a@b.com", "a1234");
+    StudentRepository.getInstance().insert("Raul", "a", "a");
     TeacherRepository.getInstance().insert("Juan Gauthama", "a@b.com", "a1234");
+    CourseRepository.getInstance().insert("Math", "Math is for losers", 1);
   }
 
   public static void main(String[] args) {

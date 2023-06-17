@@ -1,6 +1,8 @@
 package CourseManagement.context.ManagingCourse.Controller;
 
 import CourseManagement.repository.CourseRepository;
+// import AccountManagement.model.Student;
+import AccountManagement.repository.StudentRepository;
 import utils.Help;
 import view.Home;
 import java.util.*;
@@ -32,4 +34,17 @@ public class ValidateCourse {
         int teacherCourse = Home.currentTeacher.getId();
         return CourseRepository.getInstance().findAllByTeacherId(teacherCourse);
     }
+
+    public static boolean courseNotNull(int courseId) {
+        if (CourseRepository.getInstance().findById(courseId) != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void addStudentToCourse(int courseId) {
+        StudentRepository.getInstance().update(Home.currentStudent.getId(), Home.currentStudent.getName(),
+                Home.currentStudent.getEmail(), Home.currentStudent.getPassword(), courseId);
+    }
+
 }

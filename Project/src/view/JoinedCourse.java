@@ -18,14 +18,6 @@ public class JoinedCourse {
         System.out.println();
     }
 
-    private void printMaterialInformation(Material material) {
-        System.out.println("Material ID: " + material.getId());
-        System.out.println("Material Name: " + material.getName());
-        System.out.println("Material Content: ");
-        System.out.println(material.getContent());
-        System.out.println();
-    }
-
     private void printAssignmentInformation(Assignment assignment) {
         System.out.println("Assignment ID: " + assignment.getId());
         System.out.println("Assignment Name: " + assignment.getName());
@@ -44,11 +36,9 @@ public class JoinedCourse {
             return;
         }
 
-        for (Material material : materials) {
-            printMaterialInformation(material);
-            System.out.println();
-        }
-        Help.prompt("Press enter to continue");
+        ValidateMaterial.printAllMaterial(materials);
+
+        Help.pause();
         Help.cls();
         return;
     }
@@ -61,7 +51,7 @@ public class JoinedCourse {
 
             if (assignments == null || assignments.size() == 0) {
                 System.out.println("No Assignment found");
-                Help.prompt("Press enter to continue");
+                Help.pause();
                 Help.cls();
                 return;
             }
@@ -127,18 +117,10 @@ public class JoinedCourse {
                 return;
             }
 
-            Assignment selectedAssignment = null;
-
-            for (Assignment a : assignments) {
-                if (a.getId() == assignmentID) {
-                    selectedAssignment = a;
-                    break;
-                }
-            }
-
+            Assignment selectedAssignment = ValidateAssignment.assignmentNotNull(assignmentID);
             if (selectedAssignment == null) {
                 System.out.println("Invalid Assignment ID");
-                Help.prompt("Press enter to continue", 1);
+                Help.pause();
                 continue;
             } else {
                 new GradeSubmission(selectedAssignment);
@@ -157,17 +139,14 @@ public class JoinedCourse {
             if (materials == null || materials.size() == 0) {
                 System.out.println("No materials found");
             } else {
-                for (Material material : materials) {
-                    printMaterialInformation(material);
-                    System.out.println();
-                }
+                ValidateMaterial.printAllMaterial(materials);
             }
 
             Help.list("Add material", "Back");
             int input = Help.prompt(">> ", 1, 3);
 
             if (input == 1) {
-                // Add Material
+                ValidateMaterial.createMaterial(selectedCourse.getId());
             } else if (input == 2) {
                 break;
             }
@@ -175,13 +154,11 @@ public class JoinedCourse {
         return;
     }
 
-    // student
+    // student home
     public void JoinedCourseStudent() {
         Course course = ValidateCourse.viewStudentCurrentCourse();
         if (course == null) {
             System.out.println("You haven't joined a course");
-            Help.prompt("Press enter to continue");
-            Help.cls();
             return;
         }
 
@@ -206,13 +183,11 @@ public class JoinedCourse {
         return;
     }
 
-    // teacher
+    // teacher home
     public void JoinedCourseTeacher() {
         ArrayList<Course> courses = ValidateCourse.viewTeacherCurrentCourse();
         if (courses == null || courses.size() == 0) {
             System.out.println("No courses found");
-            Help.prompt("Press enter to continue");
-            Help.cls();
             return;
         }
 
