@@ -3,8 +3,6 @@ package view;
 import CourseManagement.context.ManagingCourse.controller.*;
 import CourseManagement.context.ManagingCourse.events.StudentJoinCourseEvent;
 import CourseManagement.model.*;
-// import PaymentManagement.context.ManagingPayment.controller.PaymentController;
-// import PaymentManagement.context.ManagingPayment.events.SalaryIncreaseEvent;
 import java.util.*;
 import utils.Help;
 
