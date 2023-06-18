@@ -1,12 +1,13 @@
 package CourseManagement.context.ManagingCourse.Controller;
 
 import CourseManagement.repository.CourseRepository;
-import PaymentManagement.factory.PaymentFactory;
-import PaymentManagement.model.Payment;
-import AccountManagement.model.Teacher;
+import PaymentManagement.context.ManagingPayment.events.UpdatePayment;
+// import PaymentManagement.factory.PaymentFactory;
+// import PaymentManagement.model.Payment;
+// import AccountManagement.model.Teacher;
 // import AccountManagement.model.Student;
 import AccountManagement.repository.StudentRepository;
-import AccountManagement.repository.TeacherRepository;
+// import AccountManagement.repository.TeacherRepository;
 import utils.Help;
 import view.Home;
 import java.util.*;
@@ -48,15 +49,7 @@ public class ValidateCourse {
 
     public static void addStudentToCourse(int courseId) {
         // Domain event
-        int courseTeacherId = CourseRepository.getInstance().findById(courseId).getTeacherId();
-        Teacher courseTeacher = TeacherRepository.getInstance()
-                .findById(courseTeacherId);
-
-        Payment salary = PaymentFactory.createPayment(courseTeacher.getSalary().getCurrency(),
-                courseTeacher.getSalary().getBalance() + 100000.0);
-
-        TeacherRepository.getInstance().update(courseTeacher.getId(), courseTeacher.getName(), courseTeacher.getEmail(),
-                courseTeacher.getPassword(), salary);
+        UpdatePayment.updatePayment(courseId);
 
         StudentRepository.getInstance().update(Home.getCurrentStudent().getId(), Home.getCurrentStudent().getName(),
                 Home.getCurrentStudent().getEmail(), Home.getCurrentStudent().getPassword(), courseId);

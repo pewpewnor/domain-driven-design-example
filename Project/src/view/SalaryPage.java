@@ -2,7 +2,7 @@ package view;
 
 import AccountManagement.model.Teacher;
 import PaymentManagement.context.ManagingPayment.Controller.ValidateSalary;
-import PaymentManagement.model.Payment;
+// import PaymentManagement.model.Payment;
 // import CourseManagement.context.ManagingCourse.Controller.ValidateCourse;
 // import PaymentManagement.Repository.
 import utils.Help;
