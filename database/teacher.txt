@@ -1,1 +1,1 @@
-1#Juan Gauthama#a@b.com#a1234#IDR#200000.0
+1#Juan Gauthama#a#a#IDR#0.0

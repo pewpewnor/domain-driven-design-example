@@ -15,6 +15,7 @@ public class MyScore {
         System.out.println("Submission Student Name: " + SubmissionController.getStudentFromSubmission(submission));
         System.out.println("Submission Answer: " + submission.getAnswer());
         System.out.println("Score: " + (submission.getScore() == -1 ? "Not Graded Yet" : submission.getScore()));
+        System.out.println();
     }
 
     public MyScore() {

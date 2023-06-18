@@ -6,7 +6,6 @@ import PaymentManagement.context.ManagingPayment.events.CheckoutEvent;
 import utils.Help;
 
 public class SalaryPage {
-    Teacher currentTeacher = Home.getCurrentTeacher();
 
     private void printBanner() {
         Help.border('=', 100);
@@ -16,6 +15,7 @@ public class SalaryPage {
     }
 
     private void printTeacherInformation() {
+        Teacher currentTeacher = Home.getCurrentTeacher();
         System.out.println("> Teacher ID: " + currentTeacher.getId());
         System.out.println("> Teacher Name: " + currentTeacher.getName());
         System.out.println("Your salary is: " + currentTeacher.getSalary().getCurrency() + " "
@@ -24,16 +24,13 @@ public class SalaryPage {
     }
 
     public SalaryPage() {
-        Help.cls();
-        printBanner();
-
-        // Everytime a student join a course, update teacher salary.
-        System.out.println();
-        int choice;
         do {
+            Help.cls();
+            printBanner();
             printTeacherInformation();
+
             Help.list("Checkout Salary", "Back");
-            choice = Help.prompt(">> ", 1, 2);
+            int choice = Help.prompt(">> ", 1, 2);
 
             if (choice == 1) {
                 PaymentController.checkoutSalary(new CheckoutEvent());

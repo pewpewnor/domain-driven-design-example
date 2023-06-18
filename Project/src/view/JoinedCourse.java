@@ -22,14 +22,27 @@ public class JoinedCourse {
         System.out.println();
     }
 
-    private void printAssignmentInformation(Assignment assignment) {
+    private void printAssignmentInformationForStudent(Assignment assignment) {
         System.out.println("> Assignment ID: " + assignment.getId());
         System.out.println("> Assignment Name: " + assignment.getName());
         System.out.println("> Assignment Description: ");
         System.out.println(assignment.getDescription());
-        int score = SubmissionController.getSubmissionByAssignmentAndStudent(assignment.getId()).getScore();
-        System.out.println(
-                "> Submission score: " + (score == -1 ? "Not scored yet by Teacher" : score));
+        Submission submission = SubmissionController.getSubmissionByAssignmentAndStudent(assignment.getId());
+        if (submission != null) {
+            int score = submission.getScore();
+            System.out.println(
+                    "> Submission score: " + (score == -1 ? "Not scored yet by Teacher" : score));
+        } else {
+            System.out.println("> Submission: Not submitted yet");
+        }
+        System.out.println();
+    }
+
+    private void printAssignmentInformationForTeacher(Assignment assignment) {
+        System.out.println("> Assignment ID: " + assignment.getId());
+        System.out.println("> Assignment Name: " + assignment.getName());
+        System.out.println("> Assignment Description: ");
+        System.out.println(assignment.getDescription());
         System.out.println();
     }
 
@@ -38,6 +51,7 @@ public class JoinedCourse {
         System.out.println("> Material Name: " + material.getName());
         System.out.println("> Material Content: ");
         System.out.println(material.getContent());
+        System.out.println();
     }
 
     public static void printAllMaterial(ArrayList<Material> materials) {
@@ -80,7 +94,7 @@ public class JoinedCourse {
             }
 
             for (Assignment assignment : assignments) {
-                printAssignmentInformation(assignment);
+                printAssignmentInformationForStudent(assignment);
                 System.out.println();
             }
 
@@ -93,7 +107,7 @@ public class JoinedCourse {
                 int i = 1;
                 for (Assignment assignment : assignments) {
                     System.out.println("Assignment Number " + i);
-                    printAssignmentInformation(assignment);
+                    printAssignmentInformationForStudent(assignment);
                     System.out.println();
                     i++;
                 }
@@ -127,7 +141,7 @@ public class JoinedCourse {
                 Help.cls();
             } else {
                 for (Assignment assignment : assignments) {
-                    printAssignmentInformation(assignment);
+                    printAssignmentInformationForTeacher(assignment);
                     System.out.println();
                 }
             }
@@ -162,26 +176,22 @@ public class JoinedCourse {
 
         do {
             Help.cls();
+
+            int i = 1;
             for (Assignment assignment : assignments) {
-                printAssignmentInformation(assignment);
+                System.out.println("Assignment Number " + i + " :");
+                printAssignmentInformationForTeacher(assignment);
                 System.out.println();
             }
 
-            int assignmentID = Help.prompt("Select Assigment ID to Grade (-1 to back):  ", -1);
+            int index = Help.prompt("Pick Assigment Number to Grade (0 to go back):  ", 0, assignments.size()) - 1;
 
-            if (assignmentID == -1) {
+            if (index == -1) {
                 return -1;
             }
 
-            Assignment selectedAssignment = AssignmentController.getAssignmentById(assignmentID);
-            if (selectedAssignment == null) {
-                System.out.println("Invalid Assignment ID");
-                Help.pause();
-                continue;
-            } else {
-                new GradeSubmission(selectedAssignment);
-            }
-
+            Assignment selectedAssignment = assignments.get(index);
+            new GradeSubmission(selectedAssignment);
         } while (true);
 
     }
@@ -254,29 +264,33 @@ public class JoinedCourse {
             return -1;
         }
 
-        int choice;
         do {
             Help.cls();
             printBanner();
+
+            int i = 1;
             for (Course course : courses) {
+                System.out.println("Course Number " + i + " :");
                 printCourseInformation(course);
                 System.out.println();
+                i++;
             }
 
-            choice = Help.prompt("Select course: (Input -1 to exit) >> ", -1);
+            int index = Help.prompt("Select course: (Input 0 to exit) >> ", 0, courses.size()) - 1;
 
-            if (choice == -1) {
+            if (index == -1) {
                 Help.cls();
                 return -1;
             }
 
-            selectedCourse = CourseController.getCourseById(choice);
+            selectedCourse = courses.get(index);
             if (selectedCourse == null) {
                 System.out.println("Invalid course");
                 continue;
+            } else {
+                showSelectedCourse();
             }
         } while (true);
-
     }
 
     // Teacher
@@ -296,8 +310,6 @@ public class JoinedCourse {
                 break;
             }
         } while (true);
-
-        return;
 
     }
 

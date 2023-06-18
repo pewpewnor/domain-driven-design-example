@@ -28,6 +28,7 @@ public class GradeSubmission {
 
         if (submissions.size() == 0) {
             System.out.println("No submissions by students yet!");
+            Help.pause();
             return;
         }
 
