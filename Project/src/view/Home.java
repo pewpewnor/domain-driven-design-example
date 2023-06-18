@@ -9,8 +9,8 @@ import AccountManagement.repository.TeacherRepository;
 
 public class Home {
   public static boolean currentUserIsStudent;
-  public static int currentTeacherId = 0;
-  public static int currentStudentId = 0;
+  private static int currentTeacherId = 0;
+  private static int currentStudentId = 0;
 
   public static Teacher getCurrentTeacher() {
     return TeacherRepository.getInstance().findById(currentTeacherId);
@@ -20,7 +20,7 @@ public class Home {
     return StudentRepository.getInstance().findById(currentStudentId);
   }
 
-  // student
+  // Student
   public void showStudentPage(Student student) {
     int choice = 0;
 
@@ -46,7 +46,7 @@ public class Home {
     new LandingPage();
   }
 
-  // teacher
+  // Teacher
   public void showTeacherPage(Teacher teacher) {
     int choice = 0;
 
@@ -81,8 +81,8 @@ public class Home {
     Help.border('=', 100);
   }
 
+  // All
   public Home(User user) {
-
     Help.cls();
 
     if (user instanceof Teacher) {

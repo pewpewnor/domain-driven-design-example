@@ -1,10 +1,8 @@
 package view;
 
 import AccountManagement.model.Teacher;
-import PaymentManagement.context.ManagingPayment.Controller.ValidateSalary;
-// import PaymentManagement.model.Payment;
-// import CourseManagement.context.ManagingCourse.Controller.ValidateCourse;
-// import PaymentManagement.Repository.
+import PaymentManagement.context.ManagingPayment.controller.PaymentController;
+import PaymentManagement.context.ManagingPayment.events.CheckoutEvent;
 import utils.Help;
 
 public class SalaryPage {
@@ -38,7 +36,7 @@ public class SalaryPage {
             choice = Help.prompt(">> ", 1, 2);
 
             if (choice == 1) {
-                ValidateSalary.checkoutSalary();
+                PaymentController.checkoutSalary(new CheckoutEvent());
             } else if (choice == 2) {
                 return;
             }

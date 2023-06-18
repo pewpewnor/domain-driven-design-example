@@ -4,9 +4,13 @@ import utils.Help;
 import java.util.ArrayList;
 
 import CourseManagement.model.*;
-import CourseManagement.context.ManagingCourse.Controller.*;
-import CourseManagement.context.ManagingAssignment.Controller.*;
-import CourseManagement.context.ManagingSubmission.Controller.*;
+import CourseManagement.repository.AssignmentRepository;
+import CourseManagement.context.ManagingAssignment.controller.*;
+import CourseManagement.context.ManagingAssignment.events.CreateAssignmentEvent;
+import CourseManagement.context.ManagingCourse.controller.*;
+import CourseManagement.context.ManagingCourse.events.CreateMaterialEvent;
+import CourseManagement.context.ManagingSubmission.controller.*;
+import CourseManagement.context.ManagingSubmission.events.SubmitSubmissionEvent;
 
 public class JoinedCourse {
     Course selectedCourse = null;
@@ -24,13 +28,30 @@ public class JoinedCourse {
         System.out.println("> Assignment Name: " + assignment.getName());
         System.out.println("> Assignment Description: ");
         System.out.println(assignment.getDescription());
+        int score = SubmissionController.getSubmissionByAssignmentAndStudent(assignment.getId()).getScore();
+        System.out.println(
+                "> Submission score: " + (score == -1 ? "Not scored yet by Teacher" : score));
         System.out.println();
     }
 
-    // student
+    public static void printMaterial(Material material) {
+        System.out.println("> Material ID: " + material.getId());
+        System.out.println("> Material Name: " + material.getName());
+        System.out.println("> Material Content: ");
+        System.out.println(material.getContent());
+    }
+
+    public static void printAllMaterial(ArrayList<Material> materials) {
+        for (Material material : materials) {
+            printMaterial(material);
+            System.out.println();
+        }
+    }
+
+    // Student
     public void StudentMaterialMenu() {
         Help.cls();
-        ArrayList<Material> materials = ValidateMaterial.getAllMaterialsForCourse(selectedCourse.getId());
+        ArrayList<Material> materials = MaterialController.getAllMaterialsForCourse(selectedCourse.getId());
 
         if (materials == null || materials.size() == 0) {
             System.out.println("No materials found");
@@ -39,18 +60,18 @@ public class JoinedCourse {
             return;
         }
 
-        ValidateMaterial.printAllMaterial(materials);
+        printAllMaterial(materials);
 
         Help.pause();
         Help.cls();
         return;
     }
 
-    // student
+    // Student
     public int StudentAssignmentMenu() {
         do {
             Help.cls();
-            ArrayList<Assignment> assignments = ValidateAssignment.getAllAssignmentsForCourse(selectedCourse.getId());
+            ArrayList<Assignment> assignments = AssignmentController.getAllAssignmentsForCourse(selectedCourse.getId());
 
             if (assignments == null || assignments.size() == 0) {
                 System.out.println("No Assignment found");
@@ -82,8 +103,8 @@ public class JoinedCourse {
 
                 Assignment selectedAssignment = assignments.get(index);
 
-
-                ValidateSubmission.submitSubmission(selectedAssignment.getId());
+                String answer = Help.strPrompt("Enter your answer: ", 1);
+                SubmissionController.submitSubmission(new SubmitSubmissionEvent(selectedAssignment.getId(), answer));
                 System.out.println("assignment has been submited");
                 Help.pause();
                 Help.cls();
@@ -95,11 +116,11 @@ public class JoinedCourse {
         return -1;
     }
 
-    // teacher
+    // Teacher
     public void TeacherAssignmentMenu() {
         do {
             Help.cls();
-            ArrayList<Assignment> assignments = ValidateAssignment.getAllAssignmentsForCourse(selectedCourse.getId());
+            ArrayList<Assignment> assignments = AssignmentController.getAllAssignmentsForCourse(selectedCourse.getId());
 
             if (assignments == null || assignments.size() == 0) {
                 System.out.println("No Assignment found");
@@ -117,7 +138,11 @@ public class JoinedCourse {
             Help.cls();
 
             if (input == 1) {
-                ValidateAssignment.createAssignment(selectedCourse);
+                String name = Help.strPrompt("Assignment name: ", 1);
+                String description = Help.strPrompt("description: ", 1);
+
+                AssignmentController
+                        .createAssignment(new CreateAssignmentEvent(name, description, selectedCourse.getId()));
             } else if (input == 2) {
                 GradeAssignmentMenu(assignments);
             } else if (input == 3) {
@@ -127,7 +152,7 @@ public class JoinedCourse {
         return;
     }
 
-    // teacher
+    // Teacher
     public int GradeAssignmentMenu(ArrayList<Assignment> assignments) {
         if (assignments == null || assignments.size() == 0) {
             System.out.println("No Assignment found");
@@ -149,7 +174,7 @@ public class JoinedCourse {
                 return -1;
             }
 
-            Assignment selectedAssignment = ValidateAssignment.assignmentNotNull(assignmentID);
+            Assignment selectedAssignment = AssignmentController.getAssignmentById(assignmentID);
             if (selectedAssignment == null) {
                 System.out.println("Invalid Assignment ID");
                 Help.pause();
@@ -162,35 +187,40 @@ public class JoinedCourse {
 
     }
 
-    // teacher
+    // Teacher
     public void TeacherMaterialMenu() {
         do {
             Help.cls();
-            ArrayList<Material> materials = ValidateMaterial.getAllMaterialsForCourse(selectedCourse.getId());
+            ArrayList<Material> materials = MaterialController.getAllMaterialsForCourse(selectedCourse.getId());
 
             if (materials == null || materials.size() == 0) {
                 System.out.println("No materials found");
                 Help.pause();
                 Help.cls();
             } else {
-                ValidateMaterial.printAllMaterial(materials);
+                printAllMaterial(materials);
             }
 
             Help.list("Add material", "Back");
             int input = Help.prompt(">> ", 1, 3);
 
+            Help.cls();
+
             if (input == 1) {
-                ValidateMaterial.createMaterial(selectedCourse.getId());
+                printAllMaterial(materials);
+                String name = Help.strPrompt("Enter material name: ", "Name cannot be empty", 1);
+                String content = Help.strPrompt("Enter material content: ", "Content cannot be empty", 1);
+
+                MaterialController.createMaterial(new CreateMaterialEvent(name, content, selectedCourse.getId()));
             } else if (input == 2) {
                 break;
             }
         } while (true);
-        return;
     }
 
-    // student home
+    // Student home
     public int JoinedCourseStudent() {
-        selectedCourse = ValidateCourse.viewStudentCurrentCourse();
+        selectedCourse = CourseController.viewStudentCurrentCourses();
         if (selectedCourse == null) {
             System.out.println("You haven't joined a course");
             Help.pause();
@@ -217,9 +247,9 @@ public class JoinedCourse {
         } while (true);
     }
 
-    // teacher home
+    // Teacher home
     public int JoinedCourseTeacher() {
-        ArrayList<Course> courses = ValidateCourse.viewTeacherCurrentCourse();
+        ArrayList<Course> courses = CourseController.viewTeacherCurrentCourses();
         if (courses == null || courses.size() == 0) {
             System.out.println("No courses found");
             return -1;
@@ -241,14 +271,7 @@ public class JoinedCourse {
                 return -1;
             }
 
-            // Find course
-            for (Course course : courses) {
-                if (course.getId() == choice) {
-                    selectedCourse = course;
-                    showSelectedCourse();
-                }
-            }
-
+            selectedCourse = CourseController.getCourseById(choice);
             if (selectedCourse == null) {
                 System.out.println("Invalid course");
                 continue;
@@ -257,6 +280,7 @@ public class JoinedCourse {
 
     }
 
+    // Teacher
     public void showSelectedCourse() {
         do {
             Help.cls();
@@ -284,6 +308,7 @@ public class JoinedCourse {
         Help.border('=', 100);
     }
 
+    // All
     public JoinedCourse() {
         if (Home.currentUserIsStudent) {
             int returnValue = JoinedCourseStudent();
