@@ -12,7 +12,7 @@ public class MyScore {
     public void printSubmission(int n, Submission submission) {
         System.out.println("Submssion Number " + n + ":");
         System.out.println("Submission Student ID: " + submission.getStudentId());
-        System.out.println("Submission Student Name: " + SubmissionController.getStudentFromSubmission(submission));
+        System.out.println("Submission Student Name: " + SubmissionController.getStudentFromSubmission(submission).getName());
         System.out.println("Submission Answer: " + submission.getAnswer());
         System.out.println("Score: " + (submission.getScore() == -1 ? "Not Graded Yet" : submission.getScore()));
         System.out.println();
