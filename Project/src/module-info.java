@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author braum
- *
- */
-module Project {
-}
